@@ -54,6 +54,8 @@ if (Auth.authenticated()) {
   };
   console.log(window.axios.defaults.headers.common)
 }
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'HTTP_X_CSRFTOKEN';
 
 /* eslint-disable no-new */
 new Vue({
