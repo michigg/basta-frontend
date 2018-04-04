@@ -29,7 +29,7 @@
       };
     },
     created() {
-      let now = new Date('2018/03/19');
+      let now = new Date();
       let today_yyyymmdd = this.formatDate(now);
       now.setDate(now.getDate() + 7);
       let last_weekday_yyyymmdd = this.formatDate(now);
