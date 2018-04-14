@@ -3,18 +3,18 @@
     <h5>Preise</h5>
     <div class="student">
       Student:
-      <span v-if="student">{{ student }}</span>
-      <span v-else>Keine Angaben gefunden</span>
+      <span v-if="prices.student">{{ prices.student }} €</span>
+      <span v-else>n/a</span>
     </div>
     <div class="price-employee">
-      Employee:
-      <span v-if="employee">{{ employee }}</span>
-      <span v-else>Keine Angaben gefunden</span>
+      Mitarbeiter:
+      <span v-if="prices.employee">{{ prices.employee }} €</span>
+      <span v-else>n/a</span>
     </div>
     <div class="price-guest">
-      Guest:
-      <span v-if="guest">{{ guest }}</span>
-      <span v-else>Keine Angaben gefunden</span>
+      Gast:
+      <span v-if="prices.guest">{{ prices.guest }} €</span>
+      <span v-else>n/a</span>
     </div>
   </div>
 </template>
@@ -22,7 +22,11 @@
 <script>
   export default {
     name: "PriceOverview",
-    props: ['student', 'employee', 'guest'],
+    computed: {
+      prices() {
+        return this.$store.getters.getDetailedFoodPrices
+      }
+    }
   }
 </script>
 

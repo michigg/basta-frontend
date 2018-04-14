@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="rating" class="mt-3"><strong>Rating:</strong>
+    <div id="rating" class=""><strong>Rating:</strong>
       <fa-rating :glyph="star"
                  :spacing="-1"
                  :inactive-color="'#cfcfcf'"
@@ -14,7 +14,7 @@
                  v-model="globalRating">
       </fa-rating>
     </div>
-    <div v-if="isAuthenticated()" id="user-rating" class="mt-3"><strong>Dein Rating:</strong>
+    <div v-if="isAuthenticated()" id="user-rating" class=""><strong>Dein Rating:</strong>
       <fa-rating :glyph="star"
                  :spacing="-1"
                  :inactive-color="'#cfcfcf'"
@@ -40,7 +40,6 @@
   export default {
     name: "RatingCombined",
     components: {FaRating},
-    props: ['globalRating', 'foodId'],
     data() {
       return {
         star: Star,
@@ -48,24 +47,32 @@
         loaded: false,
       };
     },
+    computed: {
+      foodID() {
+        return this.$store.getters.getDetailedFoodID
+      },
+      globalRating() {
+        return this.$store.getters.getDetailedFoodRating
+      },
+    },
     created() {
-      if (window.authentication.authenticated() && this.foodId) {
+      if (window.authentication.authenticated() && this.foodID) {
         this.loadUserRating();
         this.loaded = true;
       }
     },
     watch: {
-      foodId: function () {
+      foodID: function () {
         this.loadUserRating();
         this.loaded = true;
       },
       userRating: function (newRating) {
         if (authentication.authenticated() && this.loaded) {
-          let url = CONFIG.API_ROOT_FOOD.concat('/meals/').concat(this.foodId).concat('/rating');
+          let url = CONFIG.API_ROOT_FOOD + '/meals/' + this.$route.params.id + '/rating';
           window.axios
             .post(url, {rating: newRating})
             .then(response => {
-                this.$emit('updateFood');
+                this.$store.dispatch('loadDetailedFood', {foodId: this.$route.params.id}).then()
               }
             )
             .catch();
@@ -79,16 +86,12 @@
         return authentication.authenticated();
       },
       loadUserRating: function () {
-        console.log('LOAD USER RATING');
         if (authentication.authenticated()) {
-          console.log(this.foodId);
-          let url = CONFIG.API_ROOT_ACCOUNT.concat('/food/ratings/?food_id=').concat(this.foodId);
+          let url = CONFIG.API_ROOT_ACCOUNT + '/food/ratings/?food_id=' + this.$route.params.id;
           window.axios
             .get(url)
             .then(response => {
                 if (response.data.length > 0) {
-                  console.log('RATING');
-                  console.log(response.data);
                   this.userRating = response.data[0].rating;
                 }
               }

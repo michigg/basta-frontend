@@ -1,8 +1,8 @@
 <template>
-  <div class="p-3 border border-dark rounded bg-light text-dark">
-    <div v-if="menus">
-      <div v-for="menu in menus" class="menu">
-        <day-menu :menu="menu" :defaultImageUrl="defaultImageUrl"></day-menu>
+  <div class="p-0 bg-light text-dark">
+    <div v-if="menus.length > 0">
+      <div v-for="menu in menus" class="menu-wrapper">
+        <day-menu :menu="menu"></day-menu>
       </div>
     </div>
     <p v-else>Keine Daten gefunden.</p>
@@ -14,11 +14,18 @@
 
   export default {
     name: "WeekMenu",
-    props: ['menus', 'failMessage', 'defaultImageUrl'],
+    props: ['menus', 'failMessage'],
     components: {DayMenu: DayMenu},
   }
 </script>
 
 <style scoped>
+  .menu-wrapper:first-child {
+    border-top: none;
+  }
 
+  .menu-wrapper {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 5px;
+  }
 </style>

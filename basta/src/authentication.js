@@ -12,11 +12,13 @@ export default {
   },
 
   // Send a request to the login URL and save the returned JWT
-  login(creds) {
+  login(creds, store) {
+    console.log(store);
     console.log('LOGIN');
     window.axios.post(API_ROOT.concat('/token-auth/token/create/'), creds)
       .then((response) => {
         this.user.authenticated = true;
+        store.dispatch('login').then();
         console.log(response);
         localStorage.setItem('user', JSON.stringify(response));
         // Redirect to a specified route
@@ -32,21 +34,18 @@ export default {
   },
 
   // To log out
-  logout: function (redirect) {
+  logout: function (store) {
     window.axios.post(API_ROOT.concat('/token-auth/token/destroy/'),)
       .then((response) => {
         this.user.authenticated = false;
+        store.dispatch('logout').then();
         localStorage.removeItem('user');
         console.log(response);
-        // Redirect to a specified route
+
         window.axios.defaults.headers.common = {
           'Authorization': '',
         };
         location.reload();
-        if (redirect) {
-          router.push({name: 'home'});
-          // router.go(redirect)
-        }
       })
       .catch(function (error) {
         console.log(error);

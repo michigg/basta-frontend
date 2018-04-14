@@ -1,11 +1,11 @@
 <template>
   <div class="menu">
-    <div class="p-3 border border-dark rounded bg-light text-dark">
-      <div v-if="menu">
+    <div class="p-1 bg-light text-dark">
+      <div v-if="menu.date">
         <p>{{ menu.date | formatDateWithWeekday}}</p>
-        <ul class="border">
+        <ul class="">
           <li v-for="food in menu.menu" :data-food="food.id" :data-rating="food.rating" class="food-item media mb-2">
-            <single-menu :food="food" :defaultImageUrl="defaultImageUrl"></single-menu>
+            <single-menu :food="food"></single-menu>
           </li>
         </ul>
       </div>
@@ -21,14 +21,15 @@
 
   export default {
     name: "DayMenu",
-    props: ['menu', 'failMessage', 'defaultImageUrl'],
+    props: ['menu', 'failMessage'],
     components: {SingleMenu},
 
   }
 </script>
 
 <style scoped>
-  ul {
+  .menu, ul {
     padding: 0;
   }
+
 </style>

@@ -7,7 +7,9 @@
         </b-col>
         <b-col cols="8" class="text-center">
           <!--{% block headline %}{% endblock %}-->
-          <h2>BaStA</h2>
+          <h2>
+            <router-link :to="{name: 'home'}">BaStA</router-link>
+          </h2>
         </b-col>
         <b-col cols="2" class="text-right">
           <top-menu></top-menu>
@@ -15,7 +17,7 @@
       </b-row>
 
       <b-row id="content">
-        <b-col>
+        <b-col cols="12">
           <router-view/>
         </b-col>
       </b-row>
@@ -37,8 +39,11 @@
           </b-col>
         </b-row>
         <b-row class="text-center pb-2 bg-dark font-white p-2">
-          <b-col>
-            © Copyright 2018, Michael Götz
+          <b-col cols="4" class="text-left">
+            <small>Version 0.1.1</small>
+          </b-col>
+          <b-col cols="8" class="text-right">
+            <small>© Copyright 2018, Michael Götz</small>
           </b-col>
         </b-row>
       </footer>
@@ -98,5 +103,10 @@
 
   .font-white {
     color: #ffffff;
+  }
+
+  #content {
+    background-color: #343a40;
+    color: white;
   }
 </style>

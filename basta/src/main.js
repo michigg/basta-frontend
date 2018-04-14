@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Vuex from 'vuex';
+import {store} from './store.js';
 import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
@@ -11,6 +13,7 @@ import axios from 'axios'
 import authentication from "./authentication";
 import Vuelidate from 'vuelidate'
 
+Vue.use(Vuex);
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
 Vue.use(authentication.authenticated());
@@ -25,7 +28,8 @@ Vue.filter('formatDate', function (value) {
 
 Vue.filter('formatDateWithWeekday', function (value) {
   if (value) {
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    // var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
     let date = new Date(value);
     return days[date.getDay()] + ', ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
   }
@@ -61,6 +65,7 @@ axios.defaults.xsrfHeaderName = 'HTTP_X_CSRFTOKEN';
 new Vue({
   el: '#app',
   router,
+  store,
   components: {App},
   template: '<App/>'
 });

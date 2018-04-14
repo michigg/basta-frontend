@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-col cols="12">
     <b-tabs>
       <b-tab title="Account Details" active>
         <account-details :user="user"></account-details>
@@ -8,7 +8,7 @@
         <food></food>
       </b-tab>
     </b-tabs>
-  </div>
+  </b-col>
 </template>
 
 <script>

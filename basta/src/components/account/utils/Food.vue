@@ -2,10 +2,10 @@
   <div>
     <h4>Essen</h4>
     <div class="row p-1">
-      <div v-for="food in foods" class="col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-2">
-        <b-row class="food border p-2">
+      <div v-for="food in foods" class="col col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-2 bg-light text-dark">
+        <b-row class="food p-2">
           <b-col cols="4" class="image">
-            <a v-if="food.image" :href="food.image.thumb">
+            <a v-if="food.image" :href="food.image.image">
               <img :src="food.image.thumb" class="media-object" alt="Bild" width="100%">
             </a>
             <a v-else :href="defaultImageUrl">

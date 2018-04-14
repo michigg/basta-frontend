@@ -14,7 +14,7 @@
     name: "Logout",
     created() {
       if (Auth.authenticated()) {
-        Auth.logout();
+        Auth.logout(this.$store);
       }
       setTimeout(function () {
         router.go(-1);

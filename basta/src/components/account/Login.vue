@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isAuthenticated()">
+  <div v-if="!isAuthenticated()" class="col col-12">
     <b-row class="justify-content-center text-center ml-md-auto mt-2">
       <b-col cols="11" sm="10" md="7" lg="5" xl="4" class="border pb-2 pt-2">
         <h2>Login</h2>
@@ -38,7 +38,7 @@
       </b-col>
     </b-row>
   </div>
-  <div v-else>
+  <div v-else class="col col-12">
     <b-row class="justify-content-center text-center ml-md-auto mt-2">
       <b-col cols="11" sm="10" md="7" lg="5" xl="4" class="border pb-2 pt-2">
         Du wurdest erfolgreich eingeloggt.
@@ -65,7 +65,7 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault();
-        authentication.login({"username": this.form.username, "password": this.form.password}, -1);
+        authentication.login({"username": this.form.username, "password": this.form.password}, this.$store);
       },
       isAuthenticated: function () {
         if (authentication.authenticated()) {

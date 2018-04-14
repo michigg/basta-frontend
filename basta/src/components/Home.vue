@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <b-col id="home">
     <b-row id="home">
       <b-col cols="12" sm="6" lg="6" xl="6">
         <icon-link :config="foodConfig"></icon-link>
@@ -16,7 +16,7 @@
         <icon-link :config="linksConfig"></icon-link>
       </b-col>
     </b-row>
-  </div>
+  </b-col>
 </template>
 
 <script>

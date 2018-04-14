@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <h3>{{ title }} </h3>
+  <div class="tab-menu m-0 p-1">
     <b-tabs>
-      <b-tab title="Daily" active>
-        <day-menu :menu="dayMenu" :defaultImageUrl="defaultImageUrl"></day-menu>
+      <b-tab title="Heute" active title-link-class="rounded-0">
+        <day-menu :menu="dayMenu"></day-menu>
       </b-tab>
-      <b-tab title="Weekly">
-        <week-menu :menus="weekMenus" :defaultImageUrl="defaultImageUrl"></week-menu>
+      <b-tab title="Woche" title-link-class="rounded-0">
+        <week-menu :menus="weekMenus"></week-menu>
       </b-tab>
     </b-tabs>
   </div>
@@ -20,7 +19,7 @@
 
   export default {
     name: "TabMenu",
-    props: ['title', 'location', 'defaultImageUrl'],
+    props: ['title', 'location'],
     components: {DayMenu, WeekMenu},
     data() {
       return {
@@ -38,8 +37,6 @@
         .concat('&startdate=').concat(today_yyyymmdd)
         .concat('&enddate=').concat(today_yyyymmdd))
         .then(response => {
-          // JSON responses are automatically parsed.
-
           console.log(JSON.parse(JSON.stringify(response.data)));
           if (response.data.length == 1) {
             this.dayMenu = response.data[0];
@@ -79,5 +76,8 @@
 </script>
 
 <style scoped>
-
+  .tab-menu {
+    margin: 5px;
+    padding: 10px;
+  }
 </style>

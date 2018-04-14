@@ -1,12 +1,31 @@
 <template>
-  <b-col>
-    <b-row>
-      <div class="col col-6" v-for="location in locations">
-        <tab-menu :title="location.short" :location="location.id" :defaultImageUrl="defaultImageUrl"></tab-menu>
+  <b-row>
+    <b-col class="food-overview">
+      <div v-if="!mobile" class="row">
+        <div v-for="location in locations" class="tab-menu-wrapper col col-6">
+          <h3>{{ location.short }} </h3>
+          <tab-menu :title="location.short" :location="location.id"></tab-menu>
+        </div>
       </div>
-    </b-row>
-  </b-col>
-
+      <div v-else class="row">
+        <div v-for="location in locations" class="col col-12">
+          <b-card no-body class="mt-3 rounded-0">
+            <b-card-header header-tag="header" class="p-0" role="tab">
+              <b-btn block class="rounded-0" href="#" v-b-toggle="location.id" variant="light">
+                {{ location.short }}
+              </b-btn>
+            </b-card-header>
+            <b-collapse :id="location.id" accordion="my-accordion" role="tabpanel">
+              <b-card-body class="p-0 m-0">
+                <tab-menu :title="location.short" :location="location.id"></tab-menu>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+        </div>
+        <div class="clearfix m-3"></div>
+      </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -19,34 +38,32 @@
     components: {TabMenu},
     data() {
       return {
-        defaultImageUrl: '',
-        locations: [],
+        mobile: false,
       }
     },
+    computed: {
+      locations() {
+        return this.$store.getters.getStudWuerzburgLocations;
+      },
+    },
     created() {
-      axios.get(CONFIG.API_ROOT_FOOD.concat('/menus/locations'))
-        .then(response => {
-          // JSON responses are automatically parsed.
-          console.log(JSON.parse(JSON.stringify(response.data)));
-          this.locations = response.data;
-        })
-        .catch(e => {
-          console.error(e)
-        });
-
-      axios.get(CONFIG.API_ROOT_FOOD.concat('/meals/images/default'))
-        .then(response => {
-          // JSON responses are automatically parsed.
-          console.log(JSON.parse(JSON.stringify(response.data)));
-          this.defaultImageUrl = response.data.image;
-        })
-        .catch(e => {
-          console.error(e)
-        });
+      this.addMobileChecker();
+      this.$store.dispatch('loadLocations').then();
+      this.$store.dispatch('loadDefaultImageLocation').then();
+    },
+    methods: {
+      addMobileChecker() {
+        this.mobile = window.innerWidth < 768;
+        window.addEventListener('resize', () => {
+          this.mobile = window.innerWidth < 768;
+        }, true);
+      },
     }
   }
 </script>
 
 <style scoped>
-
+  .tab-menu-wrapper {
+    padding: 0;
+  }
 </style>

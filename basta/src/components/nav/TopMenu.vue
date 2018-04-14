@@ -11,7 +11,7 @@
         </strong>
       </div>
       <div class="mobile-nav-item">
-        <router-link to="food">Food</router-link>
+        <router-link :to="{name: 'food'}">Food</router-link>
       </div>
       <div class="mobile-nav-item">
         <a class="menu-item" href="#">Events</a>
