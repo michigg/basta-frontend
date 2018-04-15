@@ -404,7 +404,7 @@ apple:
   search:
     terms:
       - osx
-      - food
+      - foodAppStudWue
   styles:
     - brands
   unicode: f179
@@ -5036,7 +5036,7 @@ lemon:
   label: Lemon
   search:
     terms:
-      - food
+      - foodAppStudWue
   styles:
     - solid
     - regular
@@ -8989,7 +8989,7 @@ utensils:
   label: Utensils
   search:
     terms:
-      - food
+      - foodAppStudWue
       - restaurant
       - spoon
       - knife

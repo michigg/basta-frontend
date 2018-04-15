@@ -12,6 +12,9 @@
       <b-progress :value="uploadProgress" :max="100" variant="success" height="10px"
                   class="w-100"></b-progress>
     </div>
+    <div v-else-if="error" class="error-response">
+      <icon :name="'times'" :scale="2" class="error"></icon>
+    </div>
     <div v-else class="success-response">
       <icon :name="'check-circle'" :scale="2" class="success"></icon>
     </div>
@@ -32,6 +35,7 @@
       return {
         showFileUpload: true,
         showProgressBar: false,
+        error: false,
         uploadProgress: 0,
       };
     },
@@ -53,6 +57,7 @@
       onSubmit() {
         this.showFileUpload = false;
         this.showProgressBar = true;
+        this.error = false;
         let url = CONFIG.API_ROOT_FOOD + '/meals/' + this.$route.params.id + '/image';
         let config = {
           onUploadProgress: (progressEvent) => {
@@ -80,6 +85,14 @@
             }, 5000);
           })
           .catch(e => {
+            this.showProgressBar = false;
+            this.showFileUpload = false;
+            this.error = true;
+            this.uploadProgress = 0;
+            setTimeout(() => {
+              this.showFileUpload = true;
+              this.error = false;
+            }, 5000);
             console.log(e.response);
           });
       },
@@ -90,6 +103,10 @@
 <style scoped>
   .success {
     color: #57d25f;
+  }
+
+  .error {
+    color: #d22233;
   }
 
   .inputfile {
