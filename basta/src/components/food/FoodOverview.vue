@@ -2,7 +2,7 @@
   <b-row>
     <b-col class="food-overview">
       <div v-if="!mobile" class="row">
-        <div v-for="location in locations" class="tab-menu-wrapper col col-6">
+        <div v-for="location in locations" class="tab-menu-wrapper col col-6 p-2">
           <h3>{{ location.short }} </h3>
           <tab-menu :title="location.short" :location="location.id"></tab-menu>
         </div>

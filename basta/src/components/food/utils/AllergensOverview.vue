@@ -1,7 +1,7 @@
 <template>
   <div v-if="!mobile">
     <h5>Allergene</h5>
-    <div v-if="allergens.length == 0">
+    <div v-if="allergens">
       Keine Angaben gefunden.
     </div>
     <div v-else>
@@ -17,7 +17,7 @@
       </b-card-header>
       <b-collapse id="allergensBox" accordion="allergensBox-accordion" role="tabpanel">
         <b-card-body>
-          <div v-if="allergens.length == 0">
+          <div v-if="allergens">
             Keine Angaben gefunden.
           </div>
           <div v-else>

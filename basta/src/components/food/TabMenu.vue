@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-menu m-0 p-1">
+  <div class="tab-menu m-0 p-1 bg-light text-dark">
     <b-tabs>
       <b-tab title="Heute" active title-link-class="rounded-0">
         <day-menu :menu="dayMenu"></day-menu>
