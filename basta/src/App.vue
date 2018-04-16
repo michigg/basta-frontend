@@ -39,8 +39,13 @@
           </b-col>
         </b-row>
         <b-row class="text-center pb-2 bg-dark font-white p-2">
-          <b-col cols="4" class="text-left">
+          <b-col cols="2" class="text-left">
             <small>Version 0.1.1</small>
+          </b-col>
+          <b-col cols="2" id="bug-report">
+            <router-link :to="{name: 'bug-report'}">
+              <small>Bug Report</small>
+            </router-link>
           </b-col>
           <b-col cols="8" class="text-right">
             <small>© Copyright 2018, Michael Götz</small>
@@ -65,6 +70,10 @@
 </script>
 
 <style>
+  #bug-report {
+    color: white;
+  }
+
   #header {
     top: 0;
     height: 55px;

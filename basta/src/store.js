@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
       currentFoodComments: [],
       currentFoodUserImage: '',
     },
+    bugReports: [],
   },
   getters: {
     isAuthenticated: state => {
@@ -55,6 +56,9 @@ export const store = new Vuex.Store({
     getDetailedFoodComments: state => {
       return state.foodAppStudWue.currentFoodComments
     },
+    getBugReports: state => {
+      return state.bugReports
+    }
   },
   mutations: {
     logout(state) {
@@ -128,13 +132,23 @@ export const store = new Vuex.Store({
     },
     setUserImage(state, {image}) {
       state.foodAppStudWue.currentFoodUserImage = image;
-    }
+    },
+    loadBugReports(state) {
+      let url = CONFIG.API_ROOT_BUGREPORT + '/reports/';
+      window.axios
+        .get(url)
+        .then(response => {
+          state.bugReports = response.data;
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    },
   },
   actions: {
     login(context) {
       context.commit('login')
     },
-
     logout(context) {
       context.commit('logout')
     },
@@ -152,6 +166,9 @@ export const store = new Vuex.Store({
     },
     setUserImage(context, image) {
       context.commit('setUserImage', image)
+    },
+    loadBugReports(context) {
+      context.commit('loadBugReports')
     },
   },
 });

@@ -8,6 +8,7 @@ import Activation from '@/components/account/Activation'
 import Registration from '@/components/account/Registration'
 import PasswordResetMail from '@/components/account/PasswordResetMail'
 import PasswordResetConfirmation from '@/components/account/PasswordResetConfirmation'
+import BugReportOverview from '@/components/bugReport/BugReportOverview'
 
 
 import FoodOverview from '@/components/food/FoodOverview'
@@ -18,7 +19,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {path: '/', name: 'home', component: Home},
-    {path: '/login', name: 'login', component: Login },
+    {path: '/login', name: 'login', component: Login},
     {path: '/logout', name: 'logout', component: Logout, meta: {auth: false}},
     {path: '/registration', name: 'registration', component: Registration},
     {path: '/activation/:uuid/:token', name: 'activation', component: Activation},
@@ -33,5 +34,6 @@ export default new Router({
 
     {path: '/food', name: 'food', component: FoodOverview},
     {path: '/food/:id', name: 'food-detail', component: FoodDetail},
+    {path: '/bug-report', name: 'bug-report', component: BugReportOverview},
   ]
 })
