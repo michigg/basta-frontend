@@ -5,10 +5,10 @@
       <b-img :src="userFoodImage" fluid-grow alt="Fluid-Grow image"/>
     </div>
     <div v-else-if="foodImage">
-      <b-img :src="foodImage" fluid-grow alt="Fluid-Grow image"/>
+      <b-img :src="foodImage.image" fluid-grow alt="Fluid-Grow image"/>
     </div>
-    <div v-else>
-      <b-img img :src="defaultImage" fluid-grow alt="Fluid-Grow image"/>
+    <div v-else><
+      <b-img :src="defaultImage" fluid-grow alt="Fluid-Grow image"/>
     </div>
   </div>
 </template>
